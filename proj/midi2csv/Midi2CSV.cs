@@ -11,7 +11,7 @@ namespace midi2csv
 
         public MIDItoCSV()
         {
-            fields = $"{nameof(MidiLabels.time)},{nameof(MidiLabels.time_diff)},{nameof(MidiLabels.note_num)},{nameof(MidiLabels.length)},{nameof(MidiLabels.velocity)}\n";
+            fields = $"{nameof(MidiLabels.time)},{nameof(MidiLabels.time_diff)},{nameof(MidiLabels.note_num)},{nameof(MidiLabels.note_num_diff)},{nameof(MidiLabels.low_octave)},{nameof(MidiLabels.length)},{nameof(MidiLabels.velocity)}\n";
             noteInfos = new List<MidiLabels>();
         }
 
@@ -26,8 +26,8 @@ namespace midi2csv
             sb.Append(fields);
             foreach (var item in noteInfos)
             {
-                sb.Append($"{item.time},{item.time_diff},{item.note_num},{item.length},{item.velocity}\n");
-            }
+				sb.Append($"{item.time},{item.time_diff},{item.note_num},{item.note_num_diff},{item.low_octave},{item.length},{item.velocity}\n");
+			}
 
             File.WriteAllText($"{filename}.csv", sb.ToString());
 
