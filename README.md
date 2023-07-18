@@ -22,8 +22,9 @@ Reads MIDI file and saves following data into CSV file:
 
 Note that Length is calculated value by subtracting NoteOff and NoteOn time.
 Every data type is integer, but range is different:
-- time, time_diff length: Maybe int32?
-- note_num, note_num_diff velocity: [0,127]
+- time, time_diff, length: Maybe int32?
+- note_num, velocity: [0,127]
+- note_num_diff: [-127,127]
 - low_octave: [0,1]
 
 The value of low_octave will be 1 if the value of note_num is lesser than 72.
