@@ -13,8 +13,8 @@ namespace midi2csv
             if (args.Length == 0)
             {
                 Console.WriteLine("midi2csv can be executed like below:");
-                Console.WriteLine("\tdotnet midi2csv.dll C:\\temp\\midifile.midi");
-                Console.WriteLine("\tdotnet midi2csv.dll /home/tikim/midifile1.midi /home/tikim/midifile2.midi");
+                Console.WriteLine("\tdotnet midi2csv.dll C:\\temp\\midifile.mid");
+                Console.WriteLine("\tdotnet midi2csv.dll /home/tikim/midifile1.mid /home/tikim/midifile2.mid");
             }
             else
             {

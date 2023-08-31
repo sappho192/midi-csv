@@ -17,9 +17,9 @@ namespace csv2midi
             if (args.Length == 0)
             {
                 Console.WriteLine("csv2midi can be executed like below:");
-                Console.WriteLine("  dotnet midi2csv.dll C:\\temp\\midifile_predicted.csv C:\\temp\\midifile.midi");
-                Console.WriteLine("  dotnet midi2csv.dll /home/tikim/midifile_predicted.csv /home/tikim/midifile.midi");
-                Console.WriteLine("Result file will be saved like 'midifile_predicted.midi'");
+                Console.WriteLine("  dotnet midi2csv.dll C:\\temp\\midifile_predicted.csv C:\\temp\\midifile.mid");
+                Console.WriteLine("  dotnet midi2csv.dll /home/tikim/midifile_predicted.csv /home/tikim/midifile.mid");
+                Console.WriteLine("Result file will be saved like 'midifile_predicted.mid'");
             }
             else
             {
@@ -54,13 +54,13 @@ namespace csv2midi
                         for (int i = 0; i < notes.Count(); i++)
                         {
                             notes.ElementAt(i).Velocity = (SevenBitNumber)velocities[i];
-                            //var a = 1;
                         }
                     }
 
                     var filename = Path.GetFileNameWithoutExtension(midiLocation);
+                    var extension = Path.GetExtension(midiLocation);
                     var originalPath = Path.GetDirectoryName(midiLocation);
-                    var finalPath = Path.Combine(originalPath, $"{filename}_predicted.midi");
+                    var finalPath = Path.Combine(originalPath, $"{filename}_predicted{extension}");
                     midiFile.Write(finalPath, overwriteFile: true);
                 }
                 catch (NotEnoughBytesException)
