@@ -27,16 +27,9 @@ namespace csv2midi
                 var csvLocation = args[0];
                 var midiLocation = args[1];
 
-                List<int> velocities = new List<int>();
-                using (TextReader reader = File.OpenText(csvLocation))
-                using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
-                {
-                    var records = csv.GetRecords<VelocityLabel>();
-                    foreach (var item in records)
-                    {
-                        velocities.Add(item.velocity);
-                    }
-                }
+                using TextReader reader = File.OpenText(csvLocation);
+                using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
+                List<int> velocities = csv.GetRecords<VelocityLabel>().Select(v => v.velocity).ToList();
 
                 try
                 {
@@ -50,10 +43,11 @@ namespace csv2midi
                     */
                     using (NotesManager notesManager = midiFile.GetTrackChunks().Aggregate((c1, c2) => c1.Events.Count > c2.Events.Count ? c1 : c2).ManageNotes())
                     {
-                        var notes = notesManager.Notes;
-                        for (int i = 0; i < notes.Count(); i++)
+                        int i = 0;
+                        foreach (var note in notesManager.Notes)
                         {
-                            notes.ElementAt(i).Velocity = (SevenBitNumber)velocities[i];
+                            note.Velocity = (SevenBitNumber)velocities[i];
+                            i++;
                         }
                     }
 
